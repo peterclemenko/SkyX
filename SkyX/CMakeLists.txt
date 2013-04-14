@@ -44,8 +44,6 @@ set (VCLOUDS_HEADER_FILES
   Include/VClouds/FastFakeRandom.h
   Include/VClouds/GeometryBlock.h
   Include/VClouds/GeometryManager.h
-  Include/VClouds/Lightning.h
-  Include/VClouds/LightningManager.h
   Include/VClouds/VClouds.h
 )
 
@@ -55,8 +53,6 @@ set (VCLOUDS_SOURCE_FILES
   Source/VClouds/FastFakeRandom.cpp
   Source/VClouds/GeometryBlock.cpp
   Source/VClouds/GeometryManager.cpp
-  Source/VClouds/Lightning.cpp
-  Source/VClouds/LightningManager.cpp
   Source/VClouds/VClouds.cpp
 )
 
@@ -101,8 +97,8 @@ skyx_config_lib(SkyX)
 # install targets
 ###############################################################
 install(FILES ${SKYX_HEADER_FILES}
-  DESTINATION include/SKYX
+  DESTINATION include/SkyX
 )
 install(FILES ${VCLOUDS_HEADER_FILES}
-  DESTINATION include/SKYX/VClouds
+  DESTINATION include/SkyX/VClouds
 )

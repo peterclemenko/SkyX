@@ -36,24 +36,47 @@ set(CMAKE_FRAMEWORK_PATH ${CMAKE_FRAMEWORK_PATH} ${SKYX_DEP_SEARCH_PATH})
 # Core dependencies
 #######################################################################
 
-# Find Boost, you can comment those lines if Ogre was not compiled using boost threads.
-set(Boost_USE_STATIC_LIBS TRUE)
-set(Boost_ADDITIONAL_VERSIONS "1.47.0" "1.47" "1.46.0" "1.46" "1.45.0" "1.45" "1.44.0" "1.44" "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
-# Uncomment bellow if Ogre was compiled with boost threading
-#set(SKYX_BOOST_COMPONENTS thread date_time)
-find_package(Boost COMPONENTS ${SKYX_BOOST_COMPONENTS} QUIET)
-if (NOT Boost_FOUND)
-	# Try again with the other type of libs
-	if(Boost_USE_STATIC_LIBS)
-		set(Boost_USE_STATIC_LIBS)
-	else()
-		set(Boost_USE_STATIC_LIBS ON)
-	endif()
-	find_package(Boost COMPONENTS ${SKYX_BOOST_COMPONENTS} QUIET)
+if (USE_BOOST)
+    set(Boost_USE_STATIC_LIBS TRUE)
+    set(Boost_ADDITIONAL_VERSIONS "1.47.0" "1.47" "1.46.0" "1.46" "1.45.0" "1.45" "1.44.0" "1.44" "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
+    # Uncomment bellow if Ogre was compiled with boost threading
+    #set(SKYX_BOOST_COMPONENTS thread date_time)
+    find_package(Boost COMPONENTS ${SKYX_BOOST_COMPONENTS} QUIET)
+    if (NOT Boost_FOUND)
+        # Try again with the other type of libs
+        if(Boost_USE_STATIC_LIBS)
+            set(Boost_USE_STATIC_LIBS)
+        else()
+            set(Boost_USE_STATIC_LIBS ON)
+        endif()
+        find_package(Boost COMPONENTS ${SKYX_BOOST_COMPONENTS} QUIET)
+    endif()
+    macro_log_feature(Boost_FOUND "boost" "Boost (general)" "http://boost.org" TRUE "" "")
+    macro_log_feature(Boost_THREAD_FOUND "boost-thread" "Used for threading support" "http://boost.org" FALSE "" "")
+    macro_log_feature(Boost_DATE_TIME_FOUND "boost-date_time" "Used for threading support" "http://boost.org" FALSE "" "")
+else() # Assume TBB is used
+    if ("${TBB_HOME}" STREQUAL "")
+        file(TO_CMAKE_PATH "$ENV{TBB_HOME}" TBB_HOME)
+        set(TBB_HOME ${TBB_HOME} CACHE PATH "TBB_HOME dependency path" FORCE)
+    endif()
+
+    if (CMAKE_CL_64)
+        SET(TBB_ARCH "intel64")
+    else()
+        SET(TBB_ARCH "ia32")
+    endif()
+    if (MSVC90)
+        set(TBB_VC_VER "vc9")
+    elseif (MSVC10)
+        set(TBB_VC_VER "vc10")
+    elseif (MSVC11)
+        set(TBB_LIB_VER "vc11")
+    endif()
+    set(TBB_LIB_VER ${TBB_ARCH}/${TBB_VC_VER})
+
+    include_directories(${TBB_HOME}/include)
+    link_directories(${TBB_HOME}/lib/${TBB_LIB_VER})
 endif()
-macro_log_feature(Boost_FOUND "boost" "Boost (general)" "http://boost.org" TRUE "" "")
-macro_log_feature(Boost_THREAD_FOUND "boost-thread" "Used for threading support" "http://boost.org" FALSE "" "")
-macro_log_feature(Boost_DATE_TIME_FOUND "boost-date_time" "Used for threading support" "http://boost.org" FALSE "" "")
 
 # Find Ogre 3D, plus terrain and paging components
 find_package(OGRE)

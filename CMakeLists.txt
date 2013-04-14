@@ -26,11 +26,13 @@ set(CMAKE_MODULE_PATH
 include(SkyXFindPkgMacros)
 getenv_path(OGRE_HOME)
 
+option(USE_BOOST "Specifies whether Boost is used." TRUE)
+
 # Set where to find ogre Cmake files on unix
-if (UNIX)
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "/usr/local/lib/OGRE/cmake/" "/usr/lib/OGRE/cmake/")
+if (APPLE)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ENV_OGRE_HOME}/CMake ${ENV_OGRE_HOME}/CMake/Packages ${ENV_OGRE_HOME}/CMake/Utils)
 else (UNIX)
-  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ENV_OGRE_HOME}/CMake)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${ENV_OGRE_HOME}/cmake" "/usr/local/lib/OGRE/cmake/" "/usr/lib/OGRE/cmake/")
 endif ()
 
 include(CMakeDependentOption)
@@ -56,7 +58,7 @@ include(SkyXGetVersion)
 skyx_get_version(${SKYX_SOURCE_DIR}/SkyX/Include/Prerequisites.h)
 message(STATUS "Configuring SKYX ${SKYX_VERSION}")
 
-if (NOT APPLE)
+if (MSVC)
   # Create debug libraries with _d postfix
   set(CMAKE_DEBUG_POSTFIX "_d")
 endif ()
@@ -129,10 +131,10 @@ endif(WIN32 OR APPLE)
 ######################################################################
 
 # Customise what to build
-option(SKYX_BUILD_SAMPLES "Build SkyX demos" TRUE)
+option(SKYX_BUILD_SAMPLES "Build SkyX demos" FALSE)
 
 # Customise what to install
-option(SKYX_INSTALL_SAMPLES "Install SkyX demos." TRUE)
+option(SKYX_INSTALL_SAMPLES "Install SkyX demos." FALSE)
 cmake_dependent_option(SKYX_INSTALL_PDB "Install debug pdb files" FALSE "MSVC" FALSE)
 cmake_dependent_option(SKYX_STATIC "Static build" FALSE "OGRE_STATIC" FALSE)
 
