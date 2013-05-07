@@ -44,6 +44,8 @@ set (VCLOUDS_HEADER_FILES
   Include/VClouds/FastFakeRandom.h
   Include/VClouds/GeometryBlock.h
   Include/VClouds/GeometryManager.h
+  Include/VClouds/Lightning.h
+  Include/VClouds/LightningManager.h 
   Include/VClouds/VClouds.h
 )
 
@@ -53,6 +55,8 @@ set (VCLOUDS_SOURCE_FILES
   Source/VClouds/FastFakeRandom.cpp
   Source/VClouds/GeometryBlock.cpp
   Source/VClouds/GeometryManager.cpp
+  Source/VClouds/Lightning.h
+  Source/VClouds/LightningManager.h
   Source/VClouds/VClouds.cpp
 )
 
