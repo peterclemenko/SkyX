@@ -19,6 +19,7 @@ cmake_policy(SET CMP0003 NEW)
 project(SKYX)
 # Include necessary submodules
 set(CMAKE_MODULE_PATH
+  "${CMAKE_MODULE_PATH}"
   "${SKYX_SOURCE_DIR}/CMake"
   "${SKYX_SOURCE_DIR}/CMake/Utils"
 )
