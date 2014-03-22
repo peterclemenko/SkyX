@@ -160,7 +160,7 @@ if(SKYX_BUILD_SAMPLES)
 endif(SKYX_BUILD_SAMPLES)
 
 
-set(SKYX_LIB_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
+
 # Install CMake modules
 add_subdirectory(CMake)
 
