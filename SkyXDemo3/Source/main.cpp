@@ -10,7 +10,7 @@
 // Ogre.h just expands to including lots of individual OGRE header files
 // ----------------------------------------------------------------------------
 #include <Ogre.h>
-#include <OgreTextAreaOverlayElement.h>
+#include <Overlay/OgreTextAreaOverlayElement.h>
 
 // ----------------------------------------------------------------------------
 // Include the OGRE example framework

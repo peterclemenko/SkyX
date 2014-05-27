@@ -30,7 +30,7 @@ namespace SkyX
 	MeshManager::MeshManager(SkyX *s)
 		: mSkyX(s)
 		, mCreated(false)
-		, mMesh(0)
+		, mMesh(static_cast<Ogre::Mesh*>(0))
         , mSubMesh(0)
         , mEntity(0)
         , mVertexBuffer(0)

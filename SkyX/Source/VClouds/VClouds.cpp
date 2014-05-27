@@ -51,8 +51,8 @@ namespace SkyX { namespace VClouds
 		, mGeometryManager(new GeometryManager(this))
 		, mLightningManager(new LightningManager(this))
 		, mCamerasData(std::vector<CameraData>())
-		, mVolCloudsMaterial(Ogre::MeshPtr())
-		, mVolCloudsLightningMaterial(Ogre::MeshPtr())
+		, mVolCloudsMaterial(Ogre::MaterialPtr())
+		, mVolCloudsLightningMaterial(Ogre::MaterialPtr())
 	{
 	}
 
