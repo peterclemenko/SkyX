@@ -31,6 +31,7 @@ endif ()
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${SKYX_DEP_SEARCH_PATH})
 set(CMAKE_FRAMEWORK_PATH ${CMAKE_FRAMEWORK_PATH} ${SKYX_DEP_SEARCH_PATH})
 
+message(STATUS "CMAKE_MODULE_PATH in SkyXDependencies = ${CMAKE_MODULE_PATH}")
 
 #######################################################################
 # Core dependencies
