@@ -34,7 +34,7 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../SkyX/Include ${OIS_INCLUDE_DIR} ${STATIC_DEPS_INCLUDE_DIRS})
 add_executable(SkyXDemo1 ${SOURCE_FILES})
-target_link_libraries(SkyXDemo1 ${SKYX_LIBRARIES} ${OIS_LIBRARY} ${STATIC_DEPS_LIBRARIES})
+target_link_libraries(SkyXDemo1 ${SKYX_LIBRARIES} ${OIS_LIBRARY} ${STATIC_DEPS_LIBRARIES} OgreOverlay)
 
 # Install sample sources
 if (SKYX_INSTALL_SAMPLES)
