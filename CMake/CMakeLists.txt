@@ -14,6 +14,7 @@
 if(WIN32 OR APPLE)
 	set(SKYX_CMAKE_DIR "CMake")
 else()
+    set(SKYX_LIB_DIRECTORY ${CMAKE_INSTALL_PREFIX}/lib)
 	set(SKYX_CMAKE_DIR "${SKYX_LIB_DIRECTORY}/SKYX/cmake")
 endif()
 

@@ -31,6 +31,7 @@ endif ()
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${SKYX_DEP_SEARCH_PATH})
 set(CMAKE_FRAMEWORK_PATH ${CMAKE_FRAMEWORK_PATH} ${SKYX_DEP_SEARCH_PATH})
 
+message(STATUS "CMAKE_MODULE_PATH in SkyXDependencies = ${CMAKE_MODULE_PATH}")
 
 #######################################################################
 # Core dependencies
@@ -56,7 +57,7 @@ macro_log_feature(Boost_THREAD_FOUND "boost-thread" "Used for threading support"
 macro_log_feature(Boost_DATE_TIME_FOUND "boost-date_time" "Used for threading support" "http://boost.org" FALSE "" "")
 
 # Find Ogre 3D, plus terrain and paging components
-find_package(OGRE)
+find_package(OGRE COMPONENTS)
 macro_log_feature(OGRE_FOUND "OGRE" "3D library needed for the OgreGraphics plugin" "http://" TRUE "" "")
 
 #######################################################################
@@ -85,6 +86,7 @@ MACRO_DISPLAY_FEATURE_LOG()
 # Add library and include paths from the dependencies
 include_directories(
 	${OGRE_INCLUDE_DIRS}
+	${OGRE_INCLUDE_DIRS}/Overlay
 	${Boost_INCLUDE_DIRS}
 )
 
